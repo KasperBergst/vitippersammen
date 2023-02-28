@@ -1,0 +1,17 @@
+User experience:
+    - samme tip i alle eller udvalgte grupper af samme turnering
+    - nyt farve skema	
+
+Funktionalitet:
+	- tilføj ciffertips
+	- customizable ciffertips point
+
+jwt - json web token
+
+Om lang tid:
+    - sorter færdigspillede grupper nederst i displayet. Måske med en streg mellem de aktive og inaktive grupper.
+        - evt en on/off knap så man selv kan bestemme om man vil se gamle turneringer eller ej
+
+
+Make data microservice caluclate points for a user joining a group
+

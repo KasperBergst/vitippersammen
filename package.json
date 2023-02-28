@@ -1,0 +1,51 @@
+{
+  "name": "heroku",
+  "version": "1.0.0",
+  "description": "Edit me later",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "startServer": "./startServer.sh",
+    "startWorker": "./startWorker.sh",
+    "api": "node ./docs/swaggerDoc.js"
+  },
+  "keywords": [],
+  "author": "",
+  "engines": {
+    "node": "16.15.1"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
+    "cookie-encrypter": "^1.0.1",
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "data-uri-to-buffer": "^4.0.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "express-session": "^1.17.3",
+    "express-sslify": "^1.2.0",
+    "fetch-blob": "^3.2.0",
+    "formdata-polyfill": "^4.0.10",
+    "nocache": "^3.0.4",
+    "node-cron": "^3.0.2",
+    "node-domexception": "^1.0.0",
+    "node-fetch": "^3.2.10",
+    "nodemailer": "^6.7.2",
+    "pg": "^8.8.0",
+    "swagger-autogen": "^2.22.0",
+    "swagger-ui-express": "^4.5.0",
+    "uuid": "^9.0.0",
+    "web-streams-polyfill": "^3.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KasperBergst/vitippersammen-heroku.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KasperBergst/vitippersammen-heroku/issues"
+  },
+  "homepage": "https://github.com/KasperBergst/vitippersammen-heroku#readme"
+}

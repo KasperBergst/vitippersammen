@@ -1,0 +1,191 @@
+#contentMain{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#pageContent{
+    background-color: var(--middleground-color);
+    width: 95%;
+    height: 90%;
+
+    border: 1px solid black;
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#matchHeader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 95%;
+    /* height: 20%; */
+    height: fit-content;
+    margin-bottom: 2%;
+}
+
+#betsDiv{
+    width: 90%;
+    height: 40%;
+    
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+    justify-content: space-between;
+}
+
+.betDiv{
+    width: 50%;
+    height: 100%;
+}
+
+#matchMenuDiv{
+    width: 90%;
+    height: 5%;
+    margin-top: 2%;
+}
+
+#matchContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 90%;
+    height: 70%;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.flexRow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flexColumn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Display header */
+#homeTeam{
+    margin-right: 8%;
+    width: 30%;
+}
+
+#homeScore{
+    margin-right: 2%;
+    width: 5%;
+}
+
+#middle{
+    width: 10%;
+}
+
+#time{
+    width: 300%;
+}
+
+#awayScore{
+    margin-left: 2%;
+    width: 5%;
+}
+
+#awayTeam{
+    margin-left: 8%;
+    width: 30%;
+}
+
+.matchMenuButton{
+    width: 50%;
+
+    border-top: 2px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.bet{
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid black;
+    border-radius: 10px;
+
+    background-color: var(--background-color1);
+}
+
+#infoDiv, #allVotes, #personalVotes{
+    width: 100%;
+}
+
+.allVotesDiv{
+    height: 100%;
+    width: 33%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.allVotesTitle{
+    border-bottom: 1px solid black;
+    width: 80%;
+}
+
+.personalVotesDiv{
+    height: 70%;
+    width: 33%;
+    
+    overflow: hidden;
+}
+
+.personalVotesDiv h3 {
+    border-bottom: 1px solid black;
+    width: 80%;
+}
+
+
+.personalVotesDisplay{
+    width: 90%;
+    height: 100%;
+
+    overflow: auto;
+}
+
+.personalVoteRow{
+    border-bottom: 1px solid black;
+    width: 100%;
+    /* height: 10%; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+
+.newBetDiv{
+    width: 33%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#yourBetDiv{
+    background-color: var(--background-color1);
+}

@@ -1,0 +1,11 @@
+#newEmail1, #newEmail2, #oldPassword, #newPassword1, #newPassword2{
+    width: 60%;
+}
+
+input{
+    padding: 5px; 
+    border-radius: 10px; 
+    border: 2px solid black;
+    transition: 0.1s;
+    outline: none;
+} 

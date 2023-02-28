@@ -1,0 +1,193 @@
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+/* Classes */
+.groupDisplayButton{
+    border: 2px solid black;
+    border-radius: 50px;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+/* IDs */
+
+
+button:hover{
+    cursor: pointer;
+}
+
+/* Content */
+#contentMain{
+    position: absolute;
+    width: 100%;
+    height: 78vh;
+
+    top: 12vh;
+
+    /* overflow: auto; */
+}
+
+#contentSecond{
+    position: absolute;
+    width: 100%;
+    height: 90vh;
+}
+
+#leftDiv{
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    overflow: auto;
+
+    top: 5%;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    border:.5px solid #000000;
+    border-radius: 50px;
+    background-color: var(--middleground-color);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#rightDiv{
+    position: absolute;
+    width: 30%;
+    height: 90%;
+    
+    overflow: hidden;
+
+    top: 5%;
+    right: 3%;
+
+    border:.5px solid #000000;
+    border-radius: 50px;
+    background-color: var(--middleground-color);
+
+    align-content: center;
+}
+
+.membersTitle{
+    position: absolute;
+    width: 95%;
+    height: 10%;
+
+    top: 2.5%;
+    left: 0;
+    right: 0;
+}
+
+#groupTitle{    
+    padding: 0;
+
+    /* Used to vertically align the text in the div */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+#groupSearchForm{
+    position: absolute;
+    height: 35%;
+    width: 40%;
+    
+    top: 0;
+    right: 15%;
+    bottom: 0;
+
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#groupSearchInput{
+    position: absolute;
+    width: 100%;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#reloadMatchesImage {
+    width: 40%;
+    height: auto;
+}
+
+.groupDisplay{
+    width: 95%;
+    height: 80%;
+
+    overflow: auto;
+
+    table-layout: fixed;
+}
+
+.prettyGroupTable{
+    width: 100%;
+    height: fit-content;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    text-align: left;
+}
+
+.prettyGroupTableBody{
+    vertical-align: middle;
+    /* text-align: center; */
+}
+
+.prettyGroupTableBody tr{
+    height: 5vh;
+    /* height: 100vh; */
+    
+    margin-left: 100px;
+    padding-top: 4vh;
+}
+
+.prettyGroupTableBodyHoverEntireTr tr:hover{
+    background-color: var(--button_hover_color);
+    cursor: pointer;
+}
+
+.prettyGroupTableBodyHoverOnlyThTh:hover{
+    background-color: var(--button_hover_color)!important;
+    cursor: pointer;
+}
+
+.stickyTableRow th{
+    position: sticky;
+    top: 0;
+    background-color: #a8a8a8;
+    border-bottom: 2px solid black;  
+    padding: 10px;
+}
+
+.disableDiv{
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+
+.fancyButtonStyle:hover{
+    background-color: var(--button_hover_color);
+}
+
+input:focus {
+    border: 3px solid #555;
+}
+
+/* Footer */
+#footer{
+    position: absolute;
+    width: 100%;
+    height: 9vh;
+    top: 91vh;
+    bottom: 0;
+
+    overflow: auto;
+}

@@ -1,0 +1,239 @@
+/* HTML elements */
+
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+/* Classes */
+.groupDisplayButton{
+    border: 2px solid black;
+    border-radius: 50px;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+/* IDs */
+
+
+
+#menuTable{
+    position: absolute;
+    height: 50%;
+    width: 30%;
+
+    top: 0;
+    right: 1%;
+    bottom: 0;
+
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#menuTable th{
+    width: 25%;
+}
+
+#menuTable img{
+    width: 70%;
+}
+
+.menuButton{
+    width: 100%;
+    height: 100%;
+}
+
+.menuElement{
+    padding-left: 10px;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+/* Content */
+
+
+#contentSecond{
+    position: absolute;
+    width: 100%;
+    height: 90vh;
+}
+
+#leftDiv{
+    position: absolute;
+    width: 95%;
+    height: 90%;
+    overflow: auto;
+
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    border:.5px solid #000000;
+    border-radius: 50px;
+    background-color: var(--middleground-color);
+}
+
+.groupMenu{
+    position: absolute;
+    width: 95%;
+    height: 10%;
+
+    top: 2.5%;
+    left: 0;
+    right: 0;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-direction: row;
+
+    z-index: 2;
+}
+
+.membersTitle{
+    position: absolute;
+    width: 95%;
+    height: 10%;
+
+    top: 2.5%;
+    left: 0;
+    right: 0;
+}
+
+.groupTitle{    
+    padding: 0;
+
+    /* Used to vertically align the text in the div */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+
+#reloadMatchesImage {
+    width: 40%;
+    height: auto;
+}
+
+.groupDisplay{
+    position: absolute;
+    width: 95%;
+    height: 80%;
+
+    top: 15%;
+    left: 0;
+    right: 0;
+    bottom: 2.5%;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    overflow: auto;
+
+    table-layout: fixed;
+}
+
+.prettyGroupTable{
+    width: 100%;
+    height: fit-content;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    text-align: center;
+}
+
+.prettyGroupTable td {
+    height: 5vh;
+    width: 10%;
+    word-wrap: break-word;
+}
+
+.stickyTableRow th{
+    position: sticky;
+    top: 0;
+    background-color: var(--table-header-background-unplayed-color);
+    color: white;
+    border-bottom: 2px solid black;  
+    box-shadow: inset 0 2px 0 black, 0 -2px 0 black;
+    padding: 10px;
+}
+
+.disableDiv{
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* The div to add a new group */
+
+
+.fancyButton {
+    position: relative;
+
+    border:.5px solid #000000;
+    border-radius: 30px; 
+
+    padding: 10px; 
+    margin-bottom: 10px;
+
+    width: auto;
+    
+    transition: 0.1s;
+    outline: none;
+}
+
+input{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px; 
+    border-radius: 10px; 
+    border: 2px solid black;
+    transition: 0.1s;
+    outline: none;
+}
+
+input:focus {
+    border: 3px solid #555;
+}
+
+/* Drop down */
+.dropDown:hover .dropDownContent{
+    display: block;
+}
+
+.dropDownMainpage{
+    position: absolute;
+    right: 5%;
+    top: 15%;
+    display: inline-block;
+    width: 10%;
+    height: 10%;
+}
+
+.dropDownGroupPage{
+    display: inline-block;
+}
+
+.dropDownButton{
+    margin: 0;
+    background-color: var(--middleground-color);
+    border: 1px solid black;
+    border-radius: 30px;
+}
+
+.dropDownContent{
+    display: none;
+    position: absolute;
+    background: none;
+    min-width: 160px;
+    z-index: 10;
+}
+
+.dropDownContent button{
+    color: black;
+    /* padding: 10px 14px; */
+    text-decoration: none;
+    display: block;
+    margin: 0;
+    width: 100%;
+}
+
+

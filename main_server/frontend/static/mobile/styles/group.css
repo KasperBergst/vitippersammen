@@ -1,0 +1,97 @@
+#leftDiv{
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    overflow: hidden;
+
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    border:.5px solid #000000;
+    border-radius: 50px;
+    background-color: var(--middleground-color);
+}
+
+.membersTitle{
+    position: absolute;
+    width: 95%;
+    height: 10%;
+
+    top: 2.5%;
+    left: 0;
+    right: 0;
+}
+
+.groupTitle{    
+    padding: 0;
+
+    /* Used to vertically align the text in the div */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+
+#reloadMatchesImage {
+    width: 40%;
+    height: auto;
+}
+
+.groupDisplay{
+    width: 95%;
+    max-height: 80%;
+
+    overflow: auto;
+
+    table-layout: fixed;
+}
+
+.prettyGroupTable{
+    width: 100%;
+    height: fit-content;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    text-align: center;
+
+    background-color: var(--table-background-color);
+}
+
+.prettyGroupTable td {
+    height: 5vh;
+    width: 10%;
+    word-wrap: break-word;
+
+    margin-top: 2%;
+}
+
+.stickyTableRow th{
+    position: sticky;
+    top: 0;
+    background-color: var(--table-header-background-played-color);
+    color: var(--table-header-text-played-color);
+    border-bottom: 2px solid black;  
+    box-shadow: inset 0 2px 0 black, 0 -2px 0 black;
+    padding: 10px;
+}
+
+.disableDiv{
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+input{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px; 
+    border-radius: 10px; 
+    border: 2px solid black;
+    transition: 0.1s;
+    outline: none;
+}
+
+input:focus {
+    border: 3px solid #555;
+}
