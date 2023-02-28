@@ -31,7 +31,12 @@ async function processTournament(t){
 				"Accept-Language": "da"
 		  }
 	 })
-	 .then(data => data.json())
+	 .then(data => {
+		if(data.status !== 200){
+			throw "status code was not 200"
+		}
+		return data.json();
+	 })
 	 .then(data => {
 		  const matches = [];
 		  data.matches.forEach(m => {
@@ -146,7 +151,7 @@ function processMatch(match, allMatches){
 				${match.currentTime}, 
 				${match.addedTime}, 
 				'${match.status_detail}',
-				${match.status})`);
+				'${match.status}')`);
 	 }
 	 else{ // match exists and have not been played, update information
 		  return query(`UPDATE matches SET 

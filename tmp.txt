@@ -1,0 +1,7 @@
+Updater is running on port 39245
+updating all matches and scores
+Connected to database!
+Error when updating matches and scores:  status code was not 200
+Main server is running on port 8080
+Connected to database!
+done updating matches and scores
