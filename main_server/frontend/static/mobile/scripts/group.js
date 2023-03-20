@@ -158,47 +158,55 @@ export default class GroupPage{
    
 						// check if match has been played or not and then color divs accordingly and add class and onclick
 						if(match.status === "after"){ // has been played, we do not add the hover class nor the onclick
-							  this.styleFinishedMatchRow(match);
+							this.styleFinishedMatchRow(match);
+							if(i === matches.length - 1){
+								this.scrollToMatch(match, false, matches);
+							}
 						}
 						else{ // match has not been played
-							  if(match.status === "before"){ // match has not started yet, add onclick for betting
-								   if(firstUnplayedMatch || i === matches.length - 1){ // first unplayed match or the last of the group
-										document.querySelectorAll(`#match_${match.matchId}_headerRow td`).forEach(element => {
-											  element.style.borderTop = "3px solid black";
-										});
-										
-										document.getElementById(`matchTh_${match.matchId}_1`).scrollIntoView({"block": "end", "inline": "nearest"});
-		
-										firstUnplayedMatch = false;
-   
-										// add number of matches left
-										document.getElementById("matchesCounter").innerHTML = `<b>Kampe tilbage: ${matches.length - matches.indexOf(match)}</b>`;
-								   }
+							if(match.status === "before"){ // match has not started yet, add onclick for betting
+								if(firstUnplayedMatch){
+									this.scrollToMatch(match, true, matches);
+									firstUnplayedMatch = false;
+								}
 
-								   const matchAsString = JSON.stringify(match);
-								   
-								   document.getElementById(`matchTh_${match.matchId}_1`).addEventListener("click", () => {
-										this.placeBet(matchAsString, groupId, "1");
-								   });
-								   document.getElementById(`matchTh_${match.matchId}_2`).addEventListener("click", () => {
-										this.placeBet(matchAsString, groupId, "2");
-								   });
-								   document.getElementById(`matchTh_${match.matchId}_X`).addEventListener("click", () => {
-										this.placeBet(matchAsString, groupId, "X");
-								   });
+								const matchAsString = JSON.stringify(match);
+								
+								document.getElementById(`matchTh_${match.matchId}_1`).addEventListener("click", () => {
+									this.placeBet(matchAsString, groupId, "1");
+								});
+								document.getElementById(`matchTh_${match.matchId}_2`).addEventListener("click", () => {
+									this.placeBet(matchAsString, groupId, "2");
+								});
+								document.getElementById(`matchTh_${match.matchId}_X`).addEventListener("click", () => {
+									this.placeBet(matchAsString, groupId, "X");
+								});
 			  
-							  }
-							  // color the one the user has already betted on (if any)
-							  if(this.bets[match.matchId]){
-								   document.getElementById(`matchTh_${match.matchId}_${this.bets[match.matchId]}`).style.backgroundColor = "var(--bet-choice-color)";
-								   document.getElementById(`matchTh_${match.matchId}_${this.bets[match.matchId]}`).style.borderBottom = "var(--bet-choice-border)";
-							  }
+							}
+							// color the one the user has already betted on (if any)
+							if(this.bets[match.matchId]){
+								document.getElementById(`matchTh_${match.matchId}_${this.bets[match.matchId]}`).style.backgroundColor = "var(--bet-choice-color)";
+								document.getElementById(`matchTh_${match.matchId}_${this.bets[match.matchId]}`).style.borderBottom = "var(--bet-choice-border)";
+							}
 		
 						}
 					 }
 				});
 		  });
 	 };
+
+	static scrollToMatch(match, changeBorder, matches){
+		if(changeBorder){
+			document.querySelectorAll(`#match_${match.matchId}_headerRow td`).forEach(element => {
+				element.style.borderTop = "3px solid black";
+			});
+		}
+		
+		document.getElementById(`matchTh_${match.matchId}_1`).scrollIntoView({"block": "end", "inline": "nearest"});
+
+		// add number of matches left
+		document.getElementById("matchesCounter").innerHTML = `<b>Kampe tilbage: ${matches.length - matches.indexOf(match) - 1}</b>`;
+	}
 
 	 static refreshData(matchId){
 		  const timer = 1000 * 30; // 30 seconds
