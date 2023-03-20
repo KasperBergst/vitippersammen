@@ -38,8 +38,8 @@ export default class GroupApi{
 		})
 		.then(text => text)
 		.catch(e => {
-			e.text().then(m => console.log(m)).catch(e => console.log(e))
-			return "error";
+			// e.text().then(m => console.log(m)).catch(e => console.log(e))
+			return e.text();
 		});
     }
 

@@ -272,6 +272,7 @@ class NewGroupHandler{
 		  const resMessage = await GroupApi.createGroup(groupName, password1, tournamentId);
 
 		  let message = "";
+		  console.log("resmessage: ", resMessage);
 		  switch(resMessage){
 				case "OK":
 					 return {"status": true};
@@ -284,7 +285,7 @@ class NewGroupHandler{
 				default:
 					 message = "Gruppen kunne ikke oprettes, prøv venligst igen senere."
 		  }
-
+		  console.log("message: ", message);
 		  return {"status": false, "message": message}; // group not created
 	 }
 

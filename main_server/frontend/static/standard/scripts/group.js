@@ -130,29 +130,27 @@ export default class GroupPage{
                     document.getElementById("tournamentName").innerHTML = `<b>${tournament.tournamentName}</b>`;
                 })
 
-                matches.forEach(match => {
-                    // create new row for a match and append
+				for(let i = 0; i < matches.length; i++){
+					let match = matches[i];
+
+					// create new row for a match and append
                     const rows = this.createMatchRow(match, groupId);
                     rows.forEach(r => matchTableBody.appendChild(r));
     
                     // check if match has been played or not and then color divs accordingly and add class and onclick
                     if(match.status === "after"){ // has been played, we do not add the hover class nor the onclick
                         this.styleFinishedMatchRow(match);
+						if(i === matches.length - 1){
+							this.scrollToMatch(match, false, matches);
+						}
                     }
                     else{ // match has not been played
                         if(match.status === "live"){}
                         else{ // match is not live and has not been played, add onclick for betting
-                            if(firstUnplayedMatch){
-                                document.querySelectorAll(`#match_${match.matchId}_headerRow td`).forEach(element => {
-                                    element.style.borderTop = "3px solid black";
-                                });
-                                
-                                document.getElementById(`matchTh_${match.matchId}_1`).scrollIntoView({"block": "end", "inline": "nearest"});
-        
-                                firstUnplayedMatch = false;
-    
-                                // add number of matches left
-                                document.getElementById("matchesCounter").innerHTML = `<b>Kampe tilbage: ${matches.length - matches.indexOf(match)}</b>`;
+                            console.log(i === matches.length - 1);
+							if(firstUnplayedMatch){
+                                this.scrollToMatch(match, true, matches);
+								firstUnplayedMatch = false;
                             }
     
                             // add the hover class
@@ -179,11 +177,24 @@ export default class GroupPage{
                             document.getElementById(`matchTh_${match.matchId}_${this.bets[match.matchId]}`).style.backgroundColor = "var(--bet-choice-color)";
                         }
                     }
-                })
+				}
             })
         })
         .catch(e => {});
     };
+
+	static scrollToMatch(match, changeBorder, matches){
+		if(changeBorder){
+			document.querySelectorAll(`#match_${match.matchId}_headerRow td`).forEach(element => {
+				element.style.borderTop = "3px solid black";
+			});
+		}
+		
+		document.getElementById(`matchTh_${match.matchId}_1`).scrollIntoView({"block": "end", "inline": "nearest"});
+
+		// add number of matches left
+		document.getElementById("matchesCounter").innerHTML = `<b>Kampe tilbage: ${matches.length - matches.indexOf(match) - 1}</b>`;
+	}
 
     static refreshData(matchId){
         const timer = 1000 * 30; // 30 seconds

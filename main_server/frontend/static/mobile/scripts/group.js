@@ -141,7 +141,7 @@ export default class GroupPage{
 				return BasePage.sendGetReq(`/api/tournament/matches/${tournamentId}`)
 				.then(res => res.json())
 				.then(matches => {
-					 let firstUnplayedMatch = true; // used for scrolling, placed here since it must be outside of the forEach loop below
+					 let firstUnplayedMatch = true; // used for scrolling, placed here since it must be outside of the for loop below
 
 					 BasePage.sendGetReq(`/api/tournament/id/${tournamentId}`)
 					 .then(res => res.json())
@@ -149,51 +149,53 @@ export default class GroupPage{
 						  document.getElementById("tournamentName").innerHTML = `<b>${tournament.tournamentName}</b>`;
 					 })
 
-					 matches.forEach(match => {
-						  // create new row for a match and append
-						  const rows = this.createMatchRow(match, groupId);
-						  rows.forEach(r => matchTableBody.appendChild(r));
-	 
-						  // check if match has been played or not and then color divs accordingly and add class and onclick
-						  if(match.status === "after"){ // has been played, we do not add the hover class nor the onclick
-								this.styleFinishedMatchRow(match);
-						  }
-						  else{ // match has not been played
-								if(match.status === "before"){ // match has not started yet, add onclick for betting
-									 if(firstUnplayedMatch){
-										  document.querySelectorAll(`#match_${match.matchId}_headerRow td`).forEach(element => {
-												element.style.borderTop = "3px solid black";
-										  });
-										  
-										  document.getElementById(`matchTh_${match.matchId}_1`).scrollIntoView({"block": "end", "inline": "nearest"});
-		  
-										  firstUnplayedMatch = false;
-	 
-										  // add number of matches left
-										  document.getElementById("matchesCounter").innerHTML = `<b>Kampe tilbage: ${matches.length - matches.indexOf(match)}</b>`;
-									 }
+					 for(let i = 0; i < matches.length; i++){
+						let match = matches[i];
 
-									 const matchAsString = JSON.stringify(match);
-									 
-									 document.getElementById(`matchTh_${match.matchId}_1`).addEventListener("click", () => {
-										  this.placeBet(matchAsString, groupId, "1");
-									 });
-									 document.getElementById(`matchTh_${match.matchId}_2`).addEventListener("click", () => {
-										  this.placeBet(matchAsString, groupId, "2");
-									 });
-									 document.getElementById(`matchTh_${match.matchId}_X`).addEventListener("click", () => {
-										  this.placeBet(matchAsString, groupId, "X");
-									 });
-				
-								}
-								// color the one the user has already betted on (if any)
-								if(this.bets[match.matchId]){
-									 document.getElementById(`matchTh_${match.matchId}_${this.bets[match.matchId]}`).style.backgroundColor = "var(--bet-choice-color)";
-									 document.getElementById(`matchTh_${match.matchId}_${this.bets[match.matchId]}`).style.borderBottom = "var(--bet-choice-border)";
-								}
-		  
-						  }
-					 })
+						// create new row for a match and append
+						const rows = this.createMatchRow(match, groupId);
+						rows.forEach(r => matchTableBody.appendChild(r));
+   
+						// check if match has been played or not and then color divs accordingly and add class and onclick
+						if(match.status === "after"){ // has been played, we do not add the hover class nor the onclick
+							  this.styleFinishedMatchRow(match);
+						}
+						else{ // match has not been played
+							  if(match.status === "before"){ // match has not started yet, add onclick for betting
+								   if(firstUnplayedMatch || i === matches.length - 1){ // first unplayed match or the last of the group
+										document.querySelectorAll(`#match_${match.matchId}_headerRow td`).forEach(element => {
+											  element.style.borderTop = "3px solid black";
+										});
+										
+										document.getElementById(`matchTh_${match.matchId}_1`).scrollIntoView({"block": "end", "inline": "nearest"});
+		
+										firstUnplayedMatch = false;
+   
+										// add number of matches left
+										document.getElementById("matchesCounter").innerHTML = `<b>Kampe tilbage: ${matches.length - matches.indexOf(match)}</b>`;
+								   }
+
+								   const matchAsString = JSON.stringify(match);
+								   
+								   document.getElementById(`matchTh_${match.matchId}_1`).addEventListener("click", () => {
+										this.placeBet(matchAsString, groupId, "1");
+								   });
+								   document.getElementById(`matchTh_${match.matchId}_2`).addEventListener("click", () => {
+										this.placeBet(matchAsString, groupId, "2");
+								   });
+								   document.getElementById(`matchTh_${match.matchId}_X`).addEventListener("click", () => {
+										this.placeBet(matchAsString, groupId, "X");
+								   });
+			  
+							  }
+							  // color the one the user has already betted on (if any)
+							  if(this.bets[match.matchId]){
+								   document.getElementById(`matchTh_${match.matchId}_${this.bets[match.matchId]}`).style.backgroundColor = "var(--bet-choice-color)";
+								   document.getElementById(`matchTh_${match.matchId}_${this.bets[match.matchId]}`).style.borderBottom = "var(--bet-choice-border)";
+							  }
+		
+						}
+					 }
 				});
 		  });
 	 };
