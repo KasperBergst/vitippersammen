@@ -8,6 +8,16 @@ const getAllActiveTournaments = async () => {
 	 return activeTournaments;
 };
 
+const getAllTournaments = () => {
+	return query(`SELECT * FROM tournaments;`)
+}
+
+const updateEndDate = (tournamentId, newEndDate) => {
+	query(`UPDATE tournaments SET "dateEnd" = '${newEndDate}' WHERE "tournamentId" = '${tournamentId}'`);
+}
+
 export {
-	 getAllActiveTournaments
+	 getAllActiveTournaments,
+	 getAllTournaments,
+	 updateEndDate
 };

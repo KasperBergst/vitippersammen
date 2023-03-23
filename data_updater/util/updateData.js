@@ -1,7 +1,7 @@
 import { query } from "../database/api.js";
 import fetch from "node-fetch";
 import { v4 as uuid } from "uuid";
-import { getAllActiveTournaments } from "./tournamentUtil.js";
+import { getAllActiveTournaments, getAllTournaments, updateEndDate } from "./tournamentUtil.js";
 
 // process matches and update scores
 function updateMatchesAndScores(){
@@ -287,7 +287,49 @@ function getCurrentTime(match){
 	}
 }
 
+
+const refreshEndDates = () => {
+	getAllTournaments().then(tourns => {
+		tourns.forEach(t => {
+			fetch(`https://forzafootball.com/api/tournament/${t.forzaId}/results`, {
+				headers: {
+					"Accept-Language": "da"
+				}
+			})
+			.then(data => {
+				if(data.status !== 200){
+					throw "status code was not 200"
+				}
+				return data.json().then(data => {
+					return {
+						"forzaMatches": data,
+						"tournament": t
+					}
+				})	
+			})
+			.then(data => {
+				const matches = data.forzaMatches.matches;
+				const tournament = data.tournament;
+
+				let highestStartTime = 0;
+
+				matches.forEach(m => {
+					const startTime = new Date(m.kickoff_at).getTime();
+
+					if(startTime > highestStartTime){
+						highestStartTime = startTime;
+					}
+				})
+
+				if(highestStartTime > tournament.dateEnd){
+					updateEndDate(tournament.tournamentId, highestStartTime);
+				}
+			})
+		})
+	})
+}
+
 export {
 	 updateMatchesAndScores,
-	 updateScores
+	 refreshEndDates
 }
