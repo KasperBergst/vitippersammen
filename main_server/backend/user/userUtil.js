@@ -196,7 +196,6 @@ export {
 	 placeBet,
 	 isAdmin,
 	 getGroupInformation,
-	 getGroupInformation2,
 	 changeEmail,
 	 changePassword,
 	 deleteUser

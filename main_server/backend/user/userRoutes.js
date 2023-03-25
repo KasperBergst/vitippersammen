@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { isEmail } from "../misc/inputVerifier.js";
 import { endAllSessionsForUser, getUserIdBySessionId } from "./session.js";
-import { getUserByUsername, getUserById, getGroupsByUserId, getRankByIds, getBetByUserIdAndMatchIdAndGroupId, placeBet, getAllBetsByUserId, getAllBetsByUserIdAndGroupId, getGroupInformation2, changeEmail, changePassword, deleteUser } from "./userUtil.js";
+import { getUserByUsername, getUserById, getGroupsByUserId, getRankByIds, getBetByUserIdAndMatchIdAndGroupId, placeBet, getAllBetsByUserId, getAllBetsByUserIdAndGroupId, getGroupInformation, changeEmail, changePassword, deleteUser } from "./userUtil.js";
 
 const userRoutes = Router();
 
