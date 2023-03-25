@@ -47,7 +47,7 @@ userRoutes.get("/groups", async (req, res) => {
  */
 userRoutes.get("/groupInformation", async (req, res) => {
 	 getUserIdBySessionId(req.signedCookies.sessionId)
-	 .then(userId => getGroupInformation2(userId))
+	 .then(userId => getGroupInformation(userId))
 	 .then(result => res.send(result));
 })
 
