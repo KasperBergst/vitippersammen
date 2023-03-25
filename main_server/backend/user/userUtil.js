@@ -135,51 +135,16 @@ const isAdmin = async (userId) => {
 	 });
 }
 
-// retrieve group name, tournament name, matches remaining, users' points and rank for each group the user is part of
+// retrieve groupId, groupName and tournamentName for all active groups of the user
 const getGroupInformation = async (userId) => {
-	 return query(`SELECT "groupId", score, active FROM groupMembers WHERE "userId" = '${userId}'`).then(async res => {
-		  const reqs = [];
-		  
-		  res.forEach( ({groupId, score, active}) => {
-				if(active){
-					 reqs.push(
-						  new Promise( async (myResolve) => {
-								const tournamentIdRes = await query(`SELECT "tournamentId" FROM groups WHERE "groupId" = '${groupId}';`);
-								let tournamentId = tournamentIdRes ? tournamentIdRes[0].tournamentId : undefined;
-				
-								const groupNameReq = getGroupNameById(groupId);
-								const tournamentNameReq = getTournamentNameById(tournamentId);
-								const matchesLeftReq = getMatchesLeftById(tournamentId);
-								const rankReq = getRankByIds(userId, groupId);
-	 
-								const [groupName, tournamentName, matchesLeft, rank] = await Promise.all([
-									 groupNameReq,
-									 tournamentNameReq,
-									 matchesLeftReq,
-									 rankReq
-								]);
-								
-								myResolve( {
-									 "groupId": groupId,
-									 "tournamentId": tournamentId,
-									 "groupName": groupName,
-									 "tournamentName": tournamentName,
-									 "matchesLeft": matchesLeft,
-									 "score": score,
-									 "rank": rank
-								} );
-						  })
-					 );
-				}
-		  })
-		  
-		  const information = await Promise.all(reqs);
-		  
-		  information.sort( (a,b) => a.groupName.toLowerCase() > b.groupName.toLowerCase() ? 1 : (a.groupName.toLowerCase() < b.groupName.toLowerCase() ? -1 : 0) ); // sort by groupnames
-		  
-		  return information;
-	 })
-}
+	return query(
+		`
+		SELECT groups."groupId", groups."groupName", tournaments."tournamentName"
+		FROM groups
+		INNER JOIN tournaments ON groups."tournamentId" = tournaments."tournamentId" AND groups."groupId" IN (SELECT "groupId" FROM groupMembers WHERE "userId" = '${userId}' AND active = 'true');
+		`
+	);
+};
 
 const changeEmail = async (userId, newEmail) => {
 	 const emailExists = await getUserByEmail(newEmail);
@@ -231,6 +196,7 @@ export {
 	 placeBet,
 	 isAdmin,
 	 getGroupInformation,
+	 getGroupInformation2,
 	 changeEmail,
 	 changePassword,
 	 deleteUser

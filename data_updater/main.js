@@ -23,7 +23,7 @@ app.post("/run", (req, res) => {
 
 
 // const listener = app.listen(process.env.PORT || 8081, () => {
-const listener = app.listen(8081, () => {
+const listener = app.listen(0, () => {
 	console.log("Updater is running on port", listener.address().port);
 
 	updateMatchesAndScores();

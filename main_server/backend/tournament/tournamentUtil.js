@@ -33,10 +33,10 @@ const getAllTournaments = async () => {
 	 return undefined;
 };
 
-const addTournament = async (forzaId, tournamentName) => {
+const addTournament = async (forzaId, tournamentName, sport) => {
 	 const dateObj = await getStartAndEndDate(forzaId);
 
-	 const res = await query(`INSERT INTO tournaments VALUES('${forzaId}', '${uuid()}', '${tournamentName}', '${dateObj.dateStart}', '${dateObj.dateEnd}')`);
+	 const res = await query(`INSERT INTO tournaments VALUES('${forzaId}', '${uuid()}', '${tournamentName}', '${dateObj.dateStart}', '${dateObj.dateEnd}', '${sport}')`);
 	 if(res){
 		  return {"status": 200, "message": "OK"};
 	 }

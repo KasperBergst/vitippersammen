@@ -17,7 +17,7 @@ export default class MainPage{
     
     static displayGroups(){
         const groupTableBody = document.getElementById("groupTableBody");
-        BasePage.sendGetReq(`/api/user/groups`)
+        BasePage.sendGetReq(`/api/user/groupInformation`)
         .then(res => res.json())
         .then(groups => groups.sort( (a,b) => a.groupName.toLowerCase() > b.groupName.toLowerCase() ? 1 : -1))
         .then(groups => {
@@ -36,6 +36,7 @@ export default class MainPage{
 
                 newRow.innerHTML = `
                     <td style="${borderStyle} text-align: left; word-wrap: break-word;"><b>${group.groupName}</b></td>
+                    <td style="${borderStyle} text-align: left; word-wrap: break-word;"><b>${group.tournamentName}</b></td>
                 `;
 
                 groupTableBody.appendChild(newRow);

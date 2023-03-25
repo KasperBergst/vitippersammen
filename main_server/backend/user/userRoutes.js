@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { isEmail } from "../misc/inputVerifier.js";
 import { endAllSessionsForUser, getUserIdBySessionId } from "./session.js";
-import { getUserByUsername, getUserById, getGroupsByUserId, getRankByIds, getBetByUserIdAndMatchIdAndGroupId, placeBet, getAllBetsByUserId, getAllBetsByUserIdAndGroupId, getGroupInformation, changeEmail, changePassword, deleteUser } from "./userUtil.js";
+import { getUserByUsername, getUserById, getGroupsByUserId, getRankByIds, getBetByUserIdAndMatchIdAndGroupId, placeBet, getAllBetsByUserId, getAllBetsByUserIdAndGroupId, getGroupInformation2, changeEmail, changePassword, deleteUser } from "./userUtil.js";
 
 const userRoutes = Router();
 
@@ -43,11 +43,11 @@ userRoutes.get("/groups", async (req, res) => {
 
 /**
  * Endpoint for retrieving information about the groups the user is part of
- * That is group name, tournament name, matches remaining, user's score and rank
+ * That is groupId, groupName and tournamentName
  */
 userRoutes.get("/groupInformation", async (req, res) => {
 	 getUserIdBySessionId(req.signedCookies.sessionId)
-	 .then(userId => getGroupInformation(userId))
+	 .then(userId => getGroupInformation2(userId))
 	 .then(result => res.send(result));
 })
 

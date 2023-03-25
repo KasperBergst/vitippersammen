@@ -52,22 +52,27 @@ tournamentRoutes.get("/matches/:tournamentId", async (req, res) => {
  * Post new tournament
  */
 tournamentRoutes.post("/newTournament", async (req, res) => {
-	 // check body for required fields
-	 if( !req.body.forzaId || !req.body.tournamentName){
-		  return res.status(400).send("Request body must contain fields forzaId and tournamentName");
-	 }
+	// check body for required fields
+	if( !req.body.forzaId || !req.body.tournamentName || !req.body.sport){
+		return res.status(400).send("Request body must contain fields forzaId, tournamentName and sport");
+	}
 
-	 getUserIdBySessionId(req.signedCookies.sessionId)
-	 .then(userId => isAdmin(userId))
-	 .then(isAdmin => isAdmin === "1")
-	 .then(isAdmin => {
-		  if(!isAdmin){
-				res.sendStatus(401); // unauthorized request
-		  }
-		  else{
-				addTournament(req.body.forzaId, req.body.tournamentName, req.body.dateEnd).then(response => res.send(response));
-		  }
-	 });
+	const allowedSports = ["football"];
+	if(!allowedSports.includes(req.body.sport)){
+		return res.status(400).send("The provided sport is not supported");
+	}
+
+	getUserIdBySessionId(req.signedCookies.sessionId)
+	.then(userId => isAdmin(userId))
+	.then(isAdmin => isAdmin === "1")
+	.then(isAdmin => {
+		if(!isAdmin){
+			res.sendStatus(401); // unauthorized request
+		}
+		else{
+			addTournament(req.body.forzaId, req.body.tournamentName, req.body.sport).then(response => res.send(response));
+		}
+	});
 })
 
 export { tournamentRoutes };

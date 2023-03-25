@@ -289,6 +289,7 @@ function getCurrentTime(match){
 
 
 const refreshEndDates = () => {
+	console.log("Updating end dates for all tournaments");
 	getAllTournaments().then(tourns => {
 		tourns.forEach(t => {
 			fetch(`https://forzafootball.com/api/tournament/${t.forzaId}/results`, {

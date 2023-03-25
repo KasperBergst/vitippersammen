@@ -5,6 +5,7 @@ const validateInputs = (listOfInput) => {
 
 	 listOfInput.forEach(input => {
 		  if(!validString(input) && !isEmail(input)){
+			console.log("Invalidated the input:", input);
 				allValid = false;
 		  }
 	 });
