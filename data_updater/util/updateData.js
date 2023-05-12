@@ -81,6 +81,20 @@ async function processTournament(t){
 						  }
 					 }
 					 else{
+						let scoreHome = 0;
+						let scoreAway = 0;
+
+						if(m.score){
+							if(m.score.first_half &&  m.score.second_half){
+								scoreHome = m.score.first_half[0] + m.score.second_half[0];
+								scoreAway = m.score.first_half[1] + m.score.second_half[1];
+							}
+							else{
+								scoreHome = 0;
+								scoreAway = 0;
+							}
+						}
+
 						  matches.push(
 								{
 									 "forzaId": m.id,
@@ -88,8 +102,8 @@ async function processTournament(t){
 									 "teamAway": m.away_team.name,
 									 "date": `${new Date(m.kickoff_at).getTime()}`,
 									 "tournamentId": t.tournamentId,
-									 "scoreHome": m.score ? m.score.first_half[0] + m.score.second_half[0] : 0,
-									 "scoreAway": m.score ? m.score.first_half[1] + m.score.second_half[1] : 0,
+									 "scoreHome": scoreHome,
+									 "scoreAway": scoreAway,
 									 "updated": m.status === "after" ? "1" : "0",
 									 "currentTime": 0,
 									 "addedTime": 0,
