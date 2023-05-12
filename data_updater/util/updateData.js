@@ -259,7 +259,7 @@ async function startDataRefresher(forzaId){
 						}
 					}
 
-					console.log("Got data for match", match.home_team.name, " - ", match.away_team.name, ". Status:", actualStatus, ", detail:", match.status_detail);
+					// console.log("Got data for match", match.home_team.name, " - ", match.away_team.name, ". Status:", actualStatus, ", detail:", match.status_detail);
 
 					 query(`UPDATE matches SET 
 					 "updated" = '${match.status === "after" ? "1" : "0"}',
