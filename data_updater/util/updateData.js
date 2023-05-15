@@ -266,7 +266,7 @@ async function startDataRefresher(forzaId){
 					 "scoreHome" = ${scoreHome}, 
 					 "scoreAway" = ${scoreAway}, 
 					 "currentTime" = ${getCurrentTime(match)}, 
-					 "addedTime" = ${match.match_time.added ? match.match_time.added : 0}, 
+					 "addedTime" = ${match.match_time ? (match.match_time.added ? match.match_time.added : 0) : 0}, 
 					 "status_detail" = '${match.status_detail}',
 					 "status" = '${actualStatus}' WHERE "forzaId" = '${forzaId}';`)
 					 .then(_ => {
