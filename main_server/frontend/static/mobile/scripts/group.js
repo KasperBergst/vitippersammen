@@ -209,6 +209,7 @@ export default class GroupPage{
 	}
 
 	 static refreshData(matchId){
+		console.log("refresh data");
 		  const timer = 1000 * 30; // 30 seconds
 		  const resultCell = document.getElementById(`matchTh_${matchId}_result`);
 		  const dateCell = document.getElementById(`matchTh_${matchId}_date`);

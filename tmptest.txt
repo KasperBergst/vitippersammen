@@ -1,0 +1,7 @@
+Updater is running on port 38365
+updating all matches and scores
+Updating end dates for all tournaments
+Connected to database!
+Main server is running on port 8080
+Connected to database!
+done updating matches and scores

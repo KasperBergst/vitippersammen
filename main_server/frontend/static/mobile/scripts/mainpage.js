@@ -1,7 +1,6 @@
 import BasePage from "./basepage.js";
 import FileLoader from "./fileLoader.js";
 import GroupApi from "../../sharedScripts/GroupApi.js";
-import BackendApi from "../../sharedScripts/BackendApi.js";
 
 export default class MainPage{
 	 static async loadPage(){

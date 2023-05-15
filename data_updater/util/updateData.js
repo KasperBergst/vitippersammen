@@ -227,63 +227,59 @@ async function updateScores(userId = "all"){
  * @param {*} forzaId 
  */
 async function startDataRefresher(forzaId){
-	 const timer = 1000 * 60; // 60 sec
-	 setTimeout( () => {
-		 fetch(`https://forzafootball.com/api/match/${forzaId}/basic`, {
-			 headers: {
-				 "Accept-Language": "da"
-				}
-			})
-			.then(res => res.json())
-			.then(match => {
-				if(match){
-					let scoreHome = 0;
-					let scoreAway = 0;
+	fetch(`https://forzafootball.com/api/match/${forzaId}/basic`, {
+		headers: {
+			"Accept-Language": "da"
+		   }
+	   })
+	   .then(res => res.json())
+	   .then(resObj => resObj.match)
+	   .then(match => {
+		   if(match){
+			   let scoreHome = 0;
+			   let scoreAway = 0;
 
-					if(match.score && match.score.current){
-						scoreHome = match.score.current[0];
-						scoreAway = match.score.current[1];
-					}
+			   if(match.score && match.score.current){
+				   scoreHome = match.score.current[0];
+				   scoreAway = match.score.current[1];
+			   }
+			let actualStatus = match.status;
 
-					let actualStatus = match.status;
+			   if(match.status === "live"){
+				   switch(match.status_detail){
+					   case "first_half":
+					   case "second_half":
+					   case "halftime_pause":
+						   actualStatus = "live";
+						   break;
+					   default:
+						   actualStatus = "after";
+				   }
+			   }
 
-					if(match.status === "live"){
-						switch(match.status_detail){
-							case "first_half":
-							case "second_half":
-							case "halftime_pause":
-								actualStatus = "live";
-								break;
-							default:
-								actualStatus = "after";
-						}
-					}
-
-					// console.log("Got data for match", match.home_team.name, " - ", match.away_team.name, ". Status:", actualStatus, ", detail:", match.status_detail);
-
-					 query(`UPDATE matches SET 
-					 "updated" = '${match.status === "after" ? "1" : "0"}',
-					 "scoreHome" = ${scoreHome}, 
-					 "scoreAway" = ${scoreAway}, 
-					 "currentTime" = ${getCurrentTime(match)}, 
-					 "addedTime" = ${match.match_time ? (match.match_time.added ? match.match_time.added : 0) : 0}, 
-					 "status_detail" = '${match.status_detail}',
-					 "status" = '${actualStatus}' WHERE "forzaId" = '${forzaId}';`)
-					 .then(_ => {
-						const allowedStatusDetails = ["first_half", "halftime_pause", "second_half"];
-						  if(match.status === "before" // match not started yet, but will start within five minutes, repeat
-						  || (match.status === "live" && allowedStatusDetails.includes(match.status_detail))){ // match is live and not in extended/penalty shootout, refresh again
-								startDataRefresher(forzaId);
-						  }
-						  else{
-								delete liveMatches[forzaId];
-								updateScores();
-						  }
-					 })
-				}
-		  });
-
-	 }, timer); 
+			   query(`UPDATE matches SET 
+				"updated" = '${match.status === "after" ? "1" : "0"}',
+				"scoreHome" = ${scoreHome}, 
+				"scoreAway" = ${scoreAway}, 
+				"currentTime" = ${getCurrentTime(match)}, 
+				"addedTime" = ${match.match_time ? (match.match_time.added ? match.match_time.added : 0) : 0}, 
+				"status_detail" = '${match.status_detail}',
+				"status" = '${actualStatus}' WHERE "forzaId" = '${forzaId}';`)
+				.then(success => {
+				   const allowedStatusDetails = ["first_half", "halftime_pause", "second_half"];
+					 if(match.status === "before" // match not started yet, but will start within five minutes, repeat
+					 || (match.status === "live" && allowedStatusDetails.includes(match.status_detail))){ // match is live and not in extended/penalty shootout, refresh again
+					   const timer = 1000 * 60; // 60 sec
+					   setTimeout( () => startDataRefresher(forzaId), timer);
+					 }
+					 else{
+						   delete liveMatches[forzaId];
+						   updateScores();
+					 }
+				})
+		   }
+	 })
+	 .catch(e => console.log("Error updating live score for ", forzaId, "\n", e));
 }
 
 function getCurrentTime(match){
